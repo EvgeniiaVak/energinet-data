@@ -1,0 +1,148 @@
+{
+  "name": "energinet-data",
+  "title": "Energinet data",
+  "resources": [
+    {
+      "path": "co2_emission_prognosis_data_next_6_hours.csv",
+      "pathType": "local",
+      "name": "co2_emission_prognosis_data_next_6_hours",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "GB18030",
+      "dialect": {
+        "delimiter": ",",
+        "quoteChar": "\""
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "Minutes5UTC",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "Minutes5DK",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "PriceArea",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "CO2Emission",
+            "type": "integer",
+            "format": "default"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    },
+    {
+      "path": "commercial_gas_amounts_data_last_year.csv",
+      "pathType": "local",
+      "name": "commercial_gas_amounts_data_last_year",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "ISO-8859-1",
+      "dialect": {
+        "delimiter": ",",
+        "quoteChar": "\""
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "GasDay",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "KWhFromBiogas",
+            "type": "integer",
+            "format": "default"
+          },
+          {
+            "name": "KWhToDenmark",
+            "type": "integer",
+            "format": "default"
+          },
+          {
+            "name": "KWhFromNorthSea",
+            "type": "integer",
+            "format": "default"
+          },
+          {
+            "name": "KWhToOrFromStorage",
+            "type": "integer",
+            "format": "default"
+          },
+          {
+            "name": "KWhToOrFromGermany",
+            "type": "integer",
+            "format": "default"
+          },
+          {
+            "name": "KWhToSweden",
+            "type": "integer",
+            "format": "default"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    }
+  ],
+  "licenses": [
+    {
+      "name": "ODC-PDDL",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License"
+    }
+  ],
+  "views": [
+    {
+      "name": "co2-emission-next-6-hours",
+      "resources": [
+        "co2_emission_prognosis_data_next_6_hours"
+      ],
+      "spec": {
+        "group": "Minutes5DK",
+        "series": [
+          "CO2Emission"
+        ],
+        "type": "line"
+      },
+      "specType": "simple",
+      "title": "CO2 EMISSION NEXT 6 HOURS"
+    },
+    {
+      "name": "share-of-biogas-in-the-gas-system",
+      "resources": [{
+          "name": "commercial_gas_amounts_data_last_year",
+          "transform": [
+            {
+              "type": "filter",
+              "expression": "(new Date(data['GasDay'])).getFullYear() >= 2019",
+              "asFields": [
+                "Date"
+              ]
+            }
+          ]
+        }
+      ],
+      "spec": {
+        "group": "GasDay",
+        "series": [
+          "KWhFromBiogas"
+        ],
+        "type": "line"
+      },
+      "specType": "simple",
+      "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
+    }
+  ]
+}
