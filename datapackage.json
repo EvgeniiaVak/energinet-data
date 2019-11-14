@@ -42,12 +42,12 @@
       }
     },
     {
-      "path": "commercial_gas_amounts_data_last_year.csv",
+      "path": "biogas_share_last_year.csv",
       "pathType": "local",
-      "name": "commercial_gas_amounts_data_last_year",
+      "name": "biogas_share_last_year",
       "format": "csv",
       "mediatype": "text/csv",
-      "encoding": "ISO-8859-1",
+      "encoding": "ISO-8859-2",
       "dialect": {
         "delimiter": ",",
         "quoteChar": "\""
@@ -56,37 +56,17 @@
         "fields": [
           {
             "name": "GasDay",
+            "type": "date",
+            "format": "default"
+          },
+          {
+            "name": "month",
             "type": "string",
             "format": "default"
           },
           {
-            "name": "KWhFromBiogas",
-            "type": "integer",
-            "format": "default"
-          },
-          {
-            "name": "KWhToDenmark",
-            "type": "integer",
-            "format": "default"
-          },
-          {
-            "name": "KWhFromNorthSea",
-            "type": "integer",
-            "format": "default"
-          },
-          {
-            "name": "KWhToOrFromStorage",
-            "type": "integer",
-            "format": "default"
-          },
-          {
-            "name": "KWhToOrFromGermany",
-            "type": "integer",
-            "format": "default"
-          },
-          {
-            "name": "KWhToSweden",
-            "type": "integer",
+            "name": "Biogas Share",
+            "type": "number",
             "format": "default"
           }
         ],
@@ -94,13 +74,6 @@
           ""
         ]
       }
-    }
-  ],
-  "licenses": [
-    {
-      "name": "ODC-PDDL",
-      "path": "http://opendatacommons.org/licenses/pddl/",
-      "title": "Open Data Commons Public Domain Dedication and License"
     }
   ],
   "views": [
@@ -121,31 +94,37 @@
     },
     {
       "name": "share-of-biogas-in-the-gas-system",
-      "resources": [
-        {
-          "name": "commercial_gas_amounts_data_last_year",
-          "transform": [
-            {
-              "type": "formula",
-              "expressions": [
-                "data['KWhFromBiogas'] / 10000000" 
-              ],
-              "asFields": [
-                "Biogas share"
-              ]
-            }
-          ]
-        }
-      ],
+      "resources": ["biogas_share_last_year"],
       "spec": {
         "group": "GasDay",
         "series": [
-          "Biogas share"
+          "Biogas Share"
         ],
         "type": "line"
       },
       "specType": "simple",
       "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
+    },
+    {
+      "name": "share-of-biogas-in-the-gas-system-bar",
+      "resources": ["biogas_share_last_year"],
+      "spec": {
+        "group": "GasDay",
+        "series": [
+          "Biogas Share"
+        ],
+        "type": "bar"
+      },
+      "specType": "simple",
+      "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
+    }
+  ],
+  "readme": "# Energinet Data\n\nThis is a repository for temprorary data storage and experiments. Data sets are downloaded from https://www.energidataservice.dk/.",
+  "licenses": [
+    {
+      "name": "ODC-PDDL",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License"
     }
   ]
 }
