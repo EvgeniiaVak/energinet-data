@@ -131,7 +131,9 @@
         "series": [
           "CO2Emission"
         ],
-        "type": "line"
+        "type": "line",
+        "xTitle": "Time",
+        "yTitle": "CO2 Emission Amount"
       },
       "specType": "simple",
       "title": "CO2 EMISSION NEXT 6 HOURS"
@@ -146,7 +148,8 @@
         "series": [
           "Biogas Share"
         ],
-        "type": "line"
+        "type": "line",
+        "xTitle": "Date"
       },
       "specType": "simple",
       "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
@@ -161,7 +164,8 @@
         "series": [
           "Biogas Share"
         ],
-        "type": "bar"
+        "type": "bar",
+        "xTitle": "Date"
       },
       "specType": "simple",
       "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
@@ -184,13 +188,14 @@
         "series": [
           "SpotPriceDKK"
         ],
-        "type": "bar"
+        "type": "bar",
+        "xTitle": "Time",
+        "yTitle": "Price in DDK"
       },
       "specType": "simple",
       "title": "ELSPOT PRICE PER HOUR"
     }
   ],
-  "readme": "# Energinet Data\n\nThis is a repository for temprorary data storage and experiments. Data sets are downloaded from https://www.energidataservice.dk/.\n\n`datapackage.json` is used to upload data to https://datahub.io.",
   "licenses": [
     {
       "name": "ODC-PDDL",
