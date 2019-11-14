@@ -1,0 +1,37 @@
+{
+  "x_label_position": "inner-right",
+  "description": "",
+  "measure_unit_x": "",
+  "resource_id": "02356e88-7c4e-4ee9-b896-275d217cc1b9",
+  "color_pattern": "",
+  "sql_keys": [
+    "Wind and Solar power",
+    "Other"
+  ],
+  "y_tick_count": "2",
+  "t_padding": "5",
+  "header": "",
+  "l_padding": "",
+  "y_label_position": "inner-top",
+  "chart_type": "Pie Chart",
+  "sql_data": [
+    {
+      "Wind and Solar power": 22,
+      "Other": 78
+    }
+  ],
+  "id": "ac8b292b-f318-4ac6-b8ae-0851b436038d",
+  "remap_key": "",
+  "key_fields": "TotalLoad",
+  "sql_expression": "Select cast(sum(\"s1\"+\"s2\")/sum(\"p1\"+\"p2\")*100 as int) as \"Wind and Solar power\", \r\ncase when sum(\"s1\"+\"s2\")/sum(\"p1\"+\"p2\") > 1 then 0 \r\nelse cast(100-sum(\"s1\"+\"s2\")/sum(\"p1\"+\"p2\")*100 as int) end as \"Other\"\r\nfrom\r\n    (select * from\r\n        (\r\n            (SELECT \"OffshoreWindPower\" + \"OnshoreWindPower\" + \"SolarPower\" as s1, \"TotalLoad\" as p1, \"HourUTC\" as h1\r\n            FROM electricitybalancenonv\r\n            WHERE \"SolarPower\" IS NOT NULL \r\n                AND \"PriceArea\" = 'DK1') as dk1\r\n          inner join  \r\n            (SELECT \"OffshoreWindPower\" + \"OnshoreWindPower\" + \"SolarPower\" as s2, \"TotalLoad\" as p2, \"HourUTC\" as h2\r\n            FROM electricitybalancenonv\r\n            WHERE \"SolarPower\" IS NOT NULL \r\n                AND \"PriceArea\" = 'DK2') as dk2\r\n             on h1 = h2\r\n        ) \r\n order by h1 desc limit 1 -- 1 week\r\n    ) as detail",
+  "x_tick_count": "2",
+  "title": "Consumption coverage last hour",
+  "b_padding": "5",
+  "view_type": "Chart builder",
+  "measure_unit_y": "",
+  "text_chart_number_action": "substract",
+  "legend": "bottom",
+  "r_padding": "",
+  "package_id": "a6e2ea74-a0ca-49e9-be58-1a6ec816f869",
+  "use_sql_keys": "False"
+}
