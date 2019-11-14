@@ -74,6 +74,50 @@
           ""
         ]
       }
+    },
+    {
+      "path": "elspot_prices_next_day.csv",
+      "pathType": "local",
+      "name": "elspot_prices_next_day",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "ISO-8859-2",
+      "dialect": {
+        "delimiter": ",",
+        "quoteChar": "\""
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "HourUTC",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "HourDK",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "PriceArea",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "SpotPriceDKK",
+            "type": "number",
+            "format": "default"
+          },
+          {
+            "name": "SpotPriceEUR",
+            "type": "number",
+            "format": "default"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
     }
   ],
   "views": [
@@ -94,7 +138,9 @@
     },
     {
       "name": "share-of-biogas-in-the-gas-system",
-      "resources": ["biogas_share_last_year"],
+      "resources": [
+        "biogas_share_last_year"
+      ],
       "spec": {
         "group": "GasDay",
         "series": [
@@ -107,7 +153,9 @@
     },
     {
       "name": "share-of-biogas-in-the-gas-system-bar",
-      "resources": ["biogas_share_last_year"],
+      "resources": [
+        "biogas_share_last_year"
+      ],
       "spec": {
         "group": "GasDay",
         "series": [
@@ -117,9 +165,32 @@
       },
       "specType": "simple",
       "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
+    },
+    {
+      "name": "elspot-price-per-hour",
+      "resources": [
+        {
+          "name": "elspot_prices_next_day",
+          "transform": [
+            {
+              "type": "filter",
+              "expression": "data['PriceArea'] === 'SYSTEM'"
+            }
+          ]
+        }
+      ],
+      "spec": {
+        "group": "HourDK",
+        "series": [
+          "SpotPriceDKK"
+        ],
+        "type": "bar"
+      },
+      "specType": "simple",
+      "title": "ELSPOT PRICE PER HOUR"
     }
   ],
-  "readme": "# Energinet Data\n\nThis is a repository for temprorary data storage and experiments. Data sets are downloaded from https://www.energidataservice.dk/.",
+  "readme": "# Energinet Data\n\nThis is a repository for temprorary data storage and experiments. Data sets are downloaded from https://www.energidataservice.dk/.\n\n`datapackage.json` is used to upload data to https://datahub.io.",
   "licenses": [
     {
       "name": "ODC-PDDL",
