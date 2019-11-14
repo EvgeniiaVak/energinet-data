@@ -121,14 +121,17 @@
     },
     {
       "name": "share-of-biogas-in-the-gas-system",
-      "resources": [{
+      "resources": [
+        {
           "name": "commercial_gas_amounts_data_last_year",
           "transform": [
             {
-              "type": "filter",
-              "expression": "(new Date(data['GasDay'])).getFullYear() >= 2019",
+              "type": "formula",
+              "expressions": [
+                "data['KWhFromBiogas'] / 10000000" 
+              ],
               "asFields": [
-                "Date"
+                "Biogas share"
               ]
             }
           ]
@@ -137,7 +140,7 @@
       "spec": {
         "group": "GasDay",
         "series": [
-          "KWhFromBiogas"
+          "Biogas share"
         ],
         "type": "line"
       },
