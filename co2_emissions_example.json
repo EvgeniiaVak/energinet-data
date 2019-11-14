@@ -1,0 +1,72 @@
+{
+  "x_label_position": "inner-right",
+  "description": "",
+  "measure_unit_x": "",
+  "resource_id": "d856694b-5e0e-463b-acc4-d9d7d895128a",
+  "color_pattern": "",
+  "sql_keys": [
+    "Minutes5DK",
+    "PriceArea",
+    "hourdk",
+    "CO2Emission"
+  ],
+  "y_tick_count": "2",
+  "t_padding": "5",
+  "header": "",
+  "l_padding": "",
+  "y_label_position": "inner-top",
+  "chart_type": "Line Chart",
+  "sql_data": [
+    {
+      "Minutes5DK": "08:00",
+      "PriceArea": "DK1",
+      "hourdk": "2019-11-14 08:00",
+      "CO2Emission": 272
+    },
+    {
+      "Minutes5DK": "09:00",
+      "PriceArea": "DK1",
+      "hourdk": "2019-11-14 09:00",
+      "CO2Emission": 260
+    },
+    {
+      "Minutes5DK": "10:00",
+      "PriceArea": "DK1",
+      "hourdk": "2019-11-14 10:00",
+      "CO2Emission": 246
+    },
+    {
+      "Minutes5DK": "11:00",
+      "PriceArea": "DK1",
+      "hourdk": "2019-11-14 11:00",
+      "CO2Emission": 224
+    },
+    {
+      "Minutes5DK": "12:00",
+      "PriceArea": "DK1",
+      "hourdk": "2019-11-14 12:00",
+      "CO2Emission": 195
+    },
+    {
+      "Minutes5DK": "13:00",
+      "PriceArea": "DK1",
+      "hourdk": "2019-11-14 13:00",
+      "CO2Emission": 288
+    }
+  ],
+  "x_fields": "Minutes5DK",
+  "id": "ebdbbebb-ccbe-4bff-9a74-b057a0f25066",
+  "remap_key": "",
+  "key_fields": "CO2Emission",
+  "x_tick_count": "2",
+  "title": "CO2 emission next 6 hours",
+  "b_padding": "",
+  "view_type": "Chart builder",
+  "measure_unit_y": "g/kWh",
+  "text_chart_number_action": "substract",
+  "legend": "hide",
+  "r_padding": "",
+  "package_id": "7ce49eb4-b1e3-4863-b62c-786dcc15329a",
+  "sql_expression": "with b as (\r\nSELECT \"Minutes5UTC\", date_trunc('hour', \"Minutes5UTC\") as hourutc, date_trunc('hour', \"Minutes5DK\") as hourdk, \"PriceArea\", \"CO2Emission\"\r\n  FROM \"d856694b-5e0e-463b-acc4-d9d7d895128a\" \r\n  WHERE \"PriceArea\" = 'DK1' \r\n    AND \"Minutes5UTC\" >= (current_timestamp at time zone 'UTC') \r\n    AND \"Minutes5UTC\" < ((current_timestamp at time zone 'UTC') + INTERVAL '6 hours')       \r\n)\r\n, a as (\r\nselect hourutc, CAST(AVG(\"CO2Emission\") as INTEGER) AS CO2\r\n from b\r\n GROUP BY hourutc \r\n ORDER BY hourutc ASC LIMIT 6\r\n)\r\nselect distinct to_char(b.hourDK, 'HH24:MI') as \"Minutes5DK\", b.\"PriceArea\", b.hourDK, a.CO2 as \"CO2Emission\" from a\r\ninner join b on a.hourutc = b.hourutc\r\norder by b.hourDK ASC limit 6",
+  "data_labels": "True"
+}
