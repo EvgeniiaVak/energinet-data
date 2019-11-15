@@ -157,6 +157,35 @@
           ""
         ]
       }
+    },
+    {
+      "path": "co2_nex_24_hours.csv",
+      "pathType": "local",
+      "name": "co2_nex_24_hours",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "ISO-8859-1",
+      "dialect": {
+        "delimiter": ",",
+        "quoteChar": "\""
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "Minutes5DK",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "CO2Emission",
+            "type": "number",
+            "format": "default"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
     }
   ],
   "views": [
@@ -194,22 +223,6 @@
       "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
     },
     {
-      "name": "share-of-biogas-in-the-gas-system-bar",
-      "resources": [
-        "biogas_share_last_year"
-      ],
-      "spec": {
-        "group": "GasDay",
-        "series": [
-          "Biogas Share"
-        ],
-        "type": "bar",
-        "xTitle": "Date"
-      },
-      "specType": "simple",
-      "title": "SHARE OF BIOGAS IN THE GAS SYSTEM"
-    },
-    {
       "name": "elspot-price-per-hour",
       "resources": [
         "elspot_prices_next_day"
@@ -221,7 +234,7 @@
         ],
         "type": "bar",
         "xTitle": "Time",
-        "yTitle": "Price in DDK"
+        "yTitle": "Price"
       },
       "specType": "simple",
       "title": "ELSPOT PRICE PER HOUR"
@@ -229,14 +242,14 @@
     {
       "name": "co2-emission-next-24-hours",
       "resources": [
-        "co2_emission_prognosis_data_next_24_hours"
+        "co2_nex_24_hours"
       ],
       "spec": {
         "group": "Minutes5DK",
         "series": [
           "CO2Emission"
         ],
-        "type": "line",
+        "type": "bar",
         "xTitle": "Time",
         "yTitle": "CO2 Emission Amount"
       },
@@ -250,5 +263,6 @@
       "path": "http://opendatacommons.org/licenses/pddl/",
       "title": "Open Data Commons Public Domain Dedication and License"
     }
-  ]
+  ],
+  "readme": "# Energinet Data\n\nThis is a repository for temprorary data storage and experiments. Data sets are downloaded from https://www.energidataservice.dk/.\n\n`datapackage.json` is used to upload data to https://datahub.io."
 }
