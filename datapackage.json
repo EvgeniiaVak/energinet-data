@@ -172,17 +172,7 @@
     },
     {
       "name": "elspot-price-per-hour",
-      "resources": [
-        {
-          "name": "elspot_prices_next_day",
-          "transform": [
-            {
-              "type": "filter",
-              "expression": "data['PriceArea'] === 'SYSTEM'"
-            }
-          ]
-        }
-      ],
+      "resources": ["elspot_prices_next_day"],
       "spec": {
         "group": "HourDK",
         "series": [
