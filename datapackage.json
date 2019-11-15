@@ -118,6 +118,45 @@
           ""
         ]
       }
+    },
+    {
+      "path": "co2_emission_prognosis_data_next_24_hours.csv",
+      "pathType": "local",
+      "name": "co2_emission_prognosis_data_next_24_hours",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "GB18030",
+      "dialect": {
+        "delimiter": ",",
+        "quoteChar": "\""
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "Minutes5UTC",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "Minutes5DK",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "PriceArea",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "CO2Emission",
+            "type": "integer",
+            "format": "default"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
     }
   ],
   "views": [
@@ -172,7 +211,9 @@
     },
     {
       "name": "elspot-price-per-hour",
-      "resources": ["elspot_prices_next_day"],
+      "resources": [
+        "elspot_prices_next_day"
+      ],
       "spec": {
         "group": "HourDK",
         "series": [
@@ -184,6 +225,23 @@
       },
       "specType": "simple",
       "title": "ELSPOT PRICE PER HOUR"
+    },
+    {
+      "name": "co2-emission-next-24-hours",
+      "resources": [
+        "co2_emission_prognosis_data_next_24_hours"
+      ],
+      "spec": {
+        "group": "Minutes5DK",
+        "series": [
+          "CO2Emission"
+        ],
+        "type": "line",
+        "xTitle": "Time",
+        "yTitle": "CO2 Emission Amount"
+      },
+      "specType": "simple",
+      "title": "CO2 EMISSION NEXT 24 HOURS"
     }
   ],
   "licenses": [
