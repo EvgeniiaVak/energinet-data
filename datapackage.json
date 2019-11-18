@@ -264,5 +264,5 @@
       "title": "Open Data Commons Public Domain Dedication and License"
     }
   ],
-  "readme": "# Energinet Data\n\nThis is a repository for temprorary data storage and experiments. Data sets are downloaded from https://www.energidataservice.dk/.\n\n`datapackage.json` is used to upload data to https://datahub.io."
+  "readme": "Energinet Data\n\nThis is a repository for temprorary data storage and experiments. Data sets are downloaded from https://www.energidataservice.dk/."
 }
